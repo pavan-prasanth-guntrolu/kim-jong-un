@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "name": "IBM Quantum",
+    "tier": "title",
+    "logo": "/sponsors/ibm-quantum.png",
+    "website": "https://quantum.ibm.com",
+    "description": "Leading the quantum revolution with accessible quantum computing systems and comprehensive quantum education resources."
+  }
+]

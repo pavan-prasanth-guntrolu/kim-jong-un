@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Dr. Sarah Quantum",
+    "title": "Senior Quantum Researcher",
+    "company": "IBM Quantum",
+    "bio": "Dr. Sarah Quantum is a leading researcher in quantum computing with over 10 years of experience in quantum algorithms and error correction. She has contributed to numerous Qiskit improvements and published 50+ papers on quantum computing.",
+    "image": "/speakers/sarah-quantum.jpg",
+    "twitter": "@sarahquantum",
+    "linkedin": "sarahquantum",
+    "talk": {
+      "title": "The Future of Quantum Error Correction",
+      "abstract": "Exploring the latest advances in quantum error correction and its implications for near-term quantum devices.",
+      "time": "10:00 AM",
+      "date": "2025-10-15"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Prof. Alex Chen",
+    "title": "Professor of Computer Science",
+    "company": "MIT",
+    "bio": "Prof. Chen specializes in quantum algorithms and their applications to machine learning. He's the author of 'Quantum Computing: A Practical Approach' and leads the Quantum ML lab at MIT.",
+    "image": "/speakers/alex-chen.jpg",
+    "twitter": "@alexchenquantum",
+    "linkedin": "alexchen",
+    "talk": {
+      "title": "Quantum Machine Learning with Qiskit",
+      "abstract": "Hands-on exploration of quantum machine learning algorithms using Qiskit's ML framework.",
+      "time": "2:00 PM",
+      "date": "2025-10-16"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Maria Rodriguez",
+    "title": "Quantum Software Engineer",
+    "company": "Google Quantum",
+    "bio": "Maria is a passionate quantum software engineer who has worked on both Cirq and Qiskit. She advocates for quantum education and has mentored over 100 students in quantum computing.",
+    "image": "/speakers/maria-rodriguez.jpg",
+    "twitter": "@mariaquantum",
+    "linkedin": "mariarodriguez",
+    "talk": {
+      "title": "Building Your First Quantum Circuit",
+      "abstract": "A beginner-friendly introduction to quantum circuits and programming with Qiskit.",
+      "time": "11:00 AM",
+      "date": "2025-10-15"
+    }
+  }
+]
