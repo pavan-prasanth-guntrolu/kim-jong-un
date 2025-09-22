@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-const workshopsData = [
+let workshopsData = [
   {
     id: 1,
     title: "Quantum Computing Basics",
@@ -75,6 +75,7 @@ const workshopsData = [
     github: "#",
   },
 ];
+workshopsData = [];
 
 const getDifficultyColor = (difficulty) => {
   const mapping = {
@@ -230,6 +231,7 @@ const Workshops = () => {
           </div>
         </div>
       </section>
+      <h1 className="text-3xl text-center text-bold">coming soon</h1>
     </motion.div>
   );
 };

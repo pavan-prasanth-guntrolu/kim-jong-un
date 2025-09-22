@@ -275,19 +275,19 @@ const Hackathon = () => {
             {/* Key Stats */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-2xl mx-auto mb-8">
               <div className="glass-card p-4 rounded-xl border border-white/10">
-                <div className="text-2xl font-bold text-primary">48h</div>
+                <div className="text-2xl font-bold text-primary">-</div>
                 <div className="text-sm text-muted-foreground">Duration</div>
               </div>
               <div className="glass-card p-4 rounded-xl border border-white/10">
-                <div className="text-2xl font-bold text-primary">4</div>
+                <div className="text-2xl font-bold text-primary">-</div>
                 <div className="text-sm text-muted-foreground">Tracks</div>
               </div>
               <div className="glass-card p-4 rounded-xl border border-white/10">
-                <div className="text-2xl font-bold text-primary">₹55K</div>
+                <div className="text-2xl font-bold text-primary">-</div>
                 <div className="text-sm text-muted-foreground">Prize Pool</div>
               </div>
               <div className="glass-card p-4 rounded-xl border border-white/10">
-                <div className="text-2xl font-bold text-primary">2-6</div>
+                <div className="text-2xl font-bold text-primary">-</div>
                 <div className="text-sm text-muted-foreground">Team Size</div>
               </div>
             </div>
