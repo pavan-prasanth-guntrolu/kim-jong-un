@@ -116,8 +116,16 @@ const Schedule = () => {
             </div>
           </div>
         ))} */}
-
-        <h3>See the </h3>
+        <div className="text-center text-2xl  w-70  p-2 rounded-lg  text-white ">
+          <span className="bg-white text-black p-3 rounded-lg">
+            <a
+              href="https://docs.google.com/document/d/11UcNU8jXEmsaqHjMS7DYCdFn6pcprI8ar2HqfSh5WRg/edit?usp=sharing"
+              target="__blank"
+            >
+              View Full Schedule
+            </a>
+          </span>
+        </div>
       </div>
     </div>
   );
