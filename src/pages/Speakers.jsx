@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -8,12 +7,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Twitter, Linkedin, Calendar, Clock } from "lucide-react";
+import { Twitter, Linkedin, Instagram, Calendar } from "lucide-react";
 import speakersData from "@/data/speakers.json";
 
 const Speakers = () => {
   let filteredSpeakers = speakersData;
-  filteredSpeakers = [];
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -37,7 +36,7 @@ const Speakers = () => {
           </motion.div>
         </div>
       </section>
-      <h1 className="text-bold text-center text-4xl mt-10">Coming Soon</h1>
+
       <section className="py-20 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -52,21 +51,20 @@ const Speakers = () => {
               >
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Card className="glass-card border border-white/10 h-full overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
-                      <div className="relative h-64 bg-gradient-to-br from-primary/20 to-secondary/20">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center">
-                            <span className="text-3xl font-bold text-primary">
-                              {speaker.name
-                                .split(" ")
-                                .map((n) => n[0])
-                                .join("")}
-                            </span>
-                          </div>
+                    <Card className="glass-card border border-white/10 h-full flex flex-col overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
+                      <div className="relative h-64 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                        <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center">
+                          <span className="text-3xl font-bold text-primary">
+                            {speaker.name
+                              .split(" ")
+                              .map((n) => n[0])
+                              .join("")}
+                          </span>
                         </div>
                       </div>
-                      <CardContent className="p-6">
-                        <h3 className="text-xl font-semibold mb-2">
+
+                      <CardContent className="p-6 flex flex-col flex-1">
+                        <h3 className="text-xl font-semibold mb-1">
                           {speaker.name}
                         </h3>
                         <p className="text-primary font-medium mb-1">
@@ -75,23 +73,68 @@ const Speakers = () => {
                         <p className="text-muted-foreground text-sm mb-4">
                           {speaker.company}
                         </p>
-                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 flex-1">
                           {speaker.bio}
                         </p>
-                        {speaker.talk && (
-                          <div className="mt-4 pt-4 border-t border-border">
-                            <p className="font-medium text-sm">
-                              {speaker.talk.title}
-                            </p>
-                            <div className="flex items-center text-xs text-muted-foreground mt-1">
-                              <Clock className="w-3 h-3 mr-1" />
-                              {speaker.talk.time}
-                            </div>
-                          </div>
-                        )}
+
+                        {/* Social links always visible */}
+                        <div className="mt-4 flex gap-3">
+                          <a
+                            href={
+                              speaker.twitter
+                                ? `https://twitter.com/${speaker.twitter.replace(
+                                    "@",
+                                    ""
+                                  )}`
+                                : "#"
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition ${
+                              !speaker.twitter
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            }`}
+                          >
+                            <Twitter className="w-4 h-4" />
+                          </a>
+                          <a
+                            href={
+                              speaker.linkedin
+                                ? `https://linkedin.com/in/${speaker.linkedin}`
+                                : "#"
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition ${
+                              !speaker.linkedin
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            }`}
+                          >
+                            <Linkedin className="w-4 h-4" />
+                          </a>
+                          <a
+                            href={
+                              speaker.instagram
+                                ? `https://instagram.com/${speaker.instagram}`
+                                : "#"
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`w-8 h-8 flex items-center justify-center rounded-full bg-pink-100 text-pink-500 hover:bg-pink-200 transition ${
+                              !speaker.instagram
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            }`}
+                          >
+                            <Instagram className="w-4 h-4" />
+                          </a>
+                        </div>
                       </CardContent>
                     </Card>
                   </DialogTrigger>
+
                   <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
                       <DialogTitle className="text-2xl">
@@ -116,29 +159,57 @@ const Speakers = () => {
                             {speaker.company}
                           </p>
                           <div className="flex items-center space-x-4 mt-2">
-                            {speaker.twitter && (
-                              <a
-                                href={`https://twitter.com/${speaker.twitter.replace(
-                                  "@",
-                                  ""
-                                )}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-muted-foreground hover:text-primary transition-colors"
-                              >
-                                <Twitter className="w-4 h-4" />
-                              </a>
-                            )}
-                            {speaker.linkedin && (
-                              <a
-                                href={`https://linkedin.com/in/${speaker.linkedin}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-muted-foreground hover:text-primary transition-colors"
-                              >
-                                <Linkedin className="w-4 h-4" />
-                              </a>
-                            )}
+                            <a
+                              href={
+                                speaker.twitter
+                                  ? `https://twitter.com/${speaker.twitter.replace(
+                                      "@",
+                                      ""
+                                    )}`
+                                  : "#"
+                              }
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition ${
+                                !speaker.twitter
+                                  ? "opacity-50 cursor-not-allowed"
+                                  : ""
+                              }`}
+                            >
+                              <Twitter className="w-4 h-4" />
+                            </a>
+                            <a
+                              href={
+                                speaker.linkedin
+                                  ? `https://linkedin.com/in/${speaker.linkedin}`
+                                  : "#"
+                              }
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition ${
+                                !speaker.linkedin
+                                  ? "opacity-50 cursor-not-allowed"
+                                  : ""
+                              }`}
+                            >
+                              <Linkedin className="w-4 h-4" />
+                            </a>
+                            <a
+                              href={
+                                speaker.instagram
+                                  ? `https://instagram.com/${speaker.instagram}`
+                                  : "#"
+                              }
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`w-8 h-8 flex items-center justify-center rounded-full bg-pink-100 text-pink-500 hover:bg-pink-200 transition ${
+                                !speaker.instagram
+                                  ? "opacity-50 cursor-not-allowed"
+                                  : ""
+                              }`}
+                            >
+                              <Instagram className="w-4 h-4" />
+                            </a>
                           </div>
                         </div>
                       </div>
