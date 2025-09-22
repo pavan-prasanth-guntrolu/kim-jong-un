@@ -102,7 +102,7 @@ const Schedule = () => {
         </p>
         <br />
         <br />
-        {scheduleData.map((day) => (
+        {/* {scheduleData.map((day) => (
           <div key={day.date} className="mb-16">
             <h2 className="text-3xl font-semibold mb-2 text-center text-purple-300">
               {day.date} ({day.day}) – {day.title}
@@ -115,7 +115,9 @@ const Schedule = () => {
               {day.sessions.map((session) => renderSession(session))}
             </div>
           </div>
-        ))}
+        ))} */}
+
+        <h3>See the </h3>
       </div>
     </div>
   );
