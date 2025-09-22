@@ -67,9 +67,9 @@ const Sponsors = () => {
                     >
                       <Card className="glass-card border border-white/10 h-full">
                         <CardContent className="p-6 text-center">
-                          <div className="h-16 flex items-center justify-center mb-4 bg-muted/30 rounded-lg">
+                          <div className="h-16 flex items-center justify-center mb-4 bg-white rounded-lg">
                             <span className="font-bold text-primary">
-                              {sponsor.name}
+                              <img src={sponsor.logo} alt="" />
                             </span>
                           </div>
                           <h3 className="font-semibold mb-2">{sponsor.name}</h3>
