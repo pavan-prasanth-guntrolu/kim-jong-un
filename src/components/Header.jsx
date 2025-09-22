@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import NewLogo from "../../Graphics/Badge/Badge.png";
+import RguktLogo from "../../Graphics/rgukt_logo.png";
 import { useAuth } from "@/components/AuthProvider";
 
 const Header = () => {
@@ -67,6 +68,11 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
+            <img
+              src={RguktLogo}
+              alt="Qiskit Fall Fest Logo"
+              className="h-10 w-auto"
+            />
             <img
               src={NewLogo}
               alt="Qiskit Fall Fest Logo"
