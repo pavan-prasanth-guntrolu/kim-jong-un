@@ -51,10 +51,10 @@ const Home = () => {
   ];
 
   const stats = [
-    { label: "Days of Learning", value: "7" },
-    { label: "Expert Speakers", value: "8+" },
-    { label: "Hands-on Workshops", value: "12" },
-    { label: "Quantum Notebooks", value: "6+" },
+    { label: "Days of Learning", value: "-" },
+    { label: "Expert Speakers", value: "-" },
+    { label: "Hands-on Workshops", value: "-" },
+    { label: "Quantum Notebooks", value: "-" },
   ];
 
   return (

@@ -12,6 +12,7 @@ import { AuthProvider } from "@/components/AuthProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import CurtainLanding from "./pages/CurtainLanding";
 
 // Pages with lazy loading for better performance
 const Home = lazy(() => import("@/pages/Home"));
@@ -30,6 +31,8 @@ const Contact = lazy(() => import("@/pages/Contact"));
 const EventDetail = lazy(() => import("@/pages/EventDetail"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 const Login = lazy(() => import("@/pages/Login"));
+const Team = lazy(() => import("@/pages/Team"));
+const Supporters = lazy(() => import("@/pages/Supporters"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -77,15 +80,18 @@ const App = () => {
                     <Suspense fallback={<LoadingSpinner />}>
                       <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/opening" element={<CurtainLanding />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/schedule" element={<Schedule />} />
                         <Route path="/workshops" element={<Workshops />} />
                         <Route path="/speakers" element={<Speakers />} />
+                        <Route path="/team" element={<Team />} />
                         <Route path="/hackathon" element={<Hackathon />} />
                         <Route path="/materials" element={<Materials />} />
                         <Route path="/sponsors" element={<Sponsors />} />
                         <Route path="/organizers" element={<Organizers />} />
+                        <Route path="/supporters" element={<Supporters />} />
                         <Route
                           path="/code-of-conduct"
                           element={<CodeOfConduct />}

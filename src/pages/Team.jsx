@@ -9,9 +9,11 @@ import {
 } from "@/components/ui/dialog";
 import { Twitter, Linkedin, Instagram, Calendar } from "lucide-react";
 import speakersData from "@/data/speakers.json";
+import latestData from "@/data/latest-team.json";
 
 const Speakers = () => {
-  let filteredSpeakers = speakersData;
+  // let filteredSpeakers = speakersData;
+  let filteredSpeakers = latestData;
 
   return (
     <motion.div
@@ -19,7 +21,7 @@ const Speakers = () => {
       animate={{ opacity: 1 }}
       className="min-h-screen bg-background"
     >
-      <section className="hero-gradient py-20 lg:py-24">
+      {/* <section className="hero-gradient py-20 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="max-w-4xl mx-auto text-center"
@@ -33,6 +35,20 @@ const Speakers = () => {
               Learn from leading quantum computing researchers and industry
               professionals
             </p>
+          </motion.div>
+        </div>
+      </section> */}
+
+      <section className="hero-gradient py-20 lg:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="max-w-4xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-poppins mb-6">
+              Our <span className="text-gradient">Team</span>
+            </h1>
           </motion.div>
         </div>
       </section>
@@ -68,7 +84,7 @@ const Speakers = () => {
                           {speaker.name}
                         </h3>
                         <p className="text-primary font-medium mb-1">
-                          {speaker.title}
+                          {speaker.role}
                         </p>
                         <p className="text-muted-foreground text-sm mb-4">
                           {speaker.company}
