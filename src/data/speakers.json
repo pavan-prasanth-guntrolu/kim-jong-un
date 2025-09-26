@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "name": "Dr. Sarah Quantum",
+    "name": "IBM Quantum Researcher",
     "title": "Senior Quantum Researcher",
     "company": "IBM Quantum",
-    "bio": "Dr. Sarah Quantum is a leading researcher in quantum computing with over 10 years of experience in quantum algorithms and error correction. She has contributed to numerous Qiskit improvements and published 50+ papers on quantum computing.",
+    "bio": "",
     "image": "/speakers/sarah-quantum.jpg",
     "twitter": "@sarahquantum",
     "linkedin": "sarahquantum",
@@ -17,10 +17,10 @@
   },
   {
     "id": 2,
-    "name": "Prof. Alex Chen",
+    "name": "Academian",
     "title": "Professor of Computer Science",
     "company": "MIT",
-    "bio": "Prof. Chen specializes in quantum algorithms and their applications to machine learning. He's the author of 'Quantum Computing: A Practical Approach' and leads the Quantum ML lab at MIT.",
+    "bio": "",
     "image": "/speakers/alex-chen.jpg",
     "twitter": "@alexchenquantum",
     "linkedin": "alexchen",
@@ -33,10 +33,10 @@
   },
   {
     "id": 3,
-    "name": "Maria Rodriguez",
+    "name": "Industrialist",
     "title": "Quantum Software Engineer",
     "company": "Google Quantum",
-    "bio": "Maria is a passionate quantum software engineer who has worked on both Cirq and Qiskit. She advocates for quantum education and has mentored over 100 students in quantum computing.",
+    "bio": "",
     "image": "/speakers/maria-rodriguez.jpg",
     "twitter": "@mariaquantum",
     "linkedin": "mariarodriguez",
