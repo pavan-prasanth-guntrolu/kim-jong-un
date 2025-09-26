@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Twitter, Linkedin, Instagram, Calendar } from "lucide-react";
-import SupportorsData from "@/data/supportors.json";
+import SupportorsData from "@/data/supporters.json";
 
 // Explicit role mapping (singular & plural covered)
 const roleMap = {
@@ -46,7 +46,7 @@ const Supportors = () => {
             animate={{ opacity: 1, y: 0 }}
           >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-poppins mb-6">
-              Our <span className="text-gradient">Supportors</span>
+              Our <span className="text-gradient">Supporters</span>
             </h1>
           </motion.div>
         </div>
@@ -54,11 +54,11 @@ const Supportors = () => {
 
       {/* Cards Section */}
       <section className="py-20 lg:py-24">
-        <div className="container items-center mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {groupedSupportors.map(
             (group) =>
               group.members.length > 0 && (
-                <div key={group.section} className="mb-16 ">
+                <div key={group.section} className="mb-16">
                   {/* Section Heading */}
                   <h2 className="text-3xl font-bold text-center mb-10 text-gradient">
                     {group.section}
@@ -82,7 +82,6 @@ const Supportors = () => {
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                         viewport={{ once: true }}
                         whileHover={{ y: -5 }}
-                        className=""
                       >
                         <Dialog>
                           <DialogTrigger asChild>
