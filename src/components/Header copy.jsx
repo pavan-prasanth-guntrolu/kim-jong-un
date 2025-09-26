@@ -42,6 +42,21 @@ const Header = () => {
     { name: "About", href: "/about" },
     { name: "Schedule", href: "/schedule" },
     {
+      name: "About Us",
+      dropdown: [
+        { name: "About Qiskit", href: "/about" },
+        { name: "Our Team", href: "/team" },
+      ],
+    },
+
+    {
+      name: "Programs",
+      dropdown: [
+        { name: "About Qiskit", href: "/workshops" },
+        { name: "Our Team", href: "/hackathon" },
+      ],
+    },
+    {
       name: "Events",
       dropdown: [
         { name: "Workshops", href: "/workshops" },
