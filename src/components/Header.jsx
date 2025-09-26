@@ -39,7 +39,7 @@ const Header = () => {
     {
       name: "Programs",
       dropdown: [
-        { name: "About Qiskit", href: "/schedule" },
+        { name: "Schedule", href: "/schedule" },
         { name: "Workshops", href: "/workshops" },
         { name: "Hackathon", href: "/hackathon" },
       ],
