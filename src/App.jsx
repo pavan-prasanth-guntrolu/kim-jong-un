@@ -31,6 +31,7 @@ const EventDetail = lazy(() => import("@/pages/EventDetail"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 const Login = lazy(() => import("@/pages/Login"));
 const Team = lazy(() => import("@/pages/Team"));
+const Supportors = lazy(() => import("@/pages/Supportors"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -88,6 +89,7 @@ const App = () => {
                         <Route path="/materials" element={<Materials />} />
                         <Route path="/sponsors" element={<Sponsors />} />
                         <Route path="/organizers" element={<Organizers />} />
+                        <Route path="/supportors" element={<Supportors />} />
                         <Route
                           path="/code-of-conduct"
                           element={<CodeOfConduct />}
