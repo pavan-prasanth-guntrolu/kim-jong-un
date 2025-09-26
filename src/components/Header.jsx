@@ -35,13 +35,7 @@ const Header = () => {
 
   const navigation = [
     { name: "Home", href: "/" },
-    {
-      name: "About Us",
-      dropdown: [
-        { name: "About", href: "/about" },
-        { name: "Our Team", href: "/team" },
-      ],
-    },
+
     {
       name: "Programs",
       dropdown: [
@@ -59,7 +53,15 @@ const Header = () => {
     },
     { name: "Sponsors", href: "/sponsors" },
     { name: "Contact", href: "/contact" },
-    { name: "Supportors", href: "/supportors" },
+    { name: "Supporters", href: "/supporters" },
+
+    {
+      name: "About Us",
+      dropdown: [
+        { name: "About", href: "/about" },
+        { name: "Our Team", href: "/team" },
+      ],
+    },
   ];
 
   const isActive = (href) => location.pathname === href;

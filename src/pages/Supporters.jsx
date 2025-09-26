@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Twitter, Linkedin, Instagram, Calendar } from "lucide-react";
-import SupportorsData from "@/data/supportors.json";
+import supportersData from "@/data/supporters.json";
 
 // Explicit role mapping (singular & plural covered)
 const roleMap = {
@@ -18,12 +18,12 @@ const roleMap = {
   "Co-Convenor": ["co-convenor", "co-convenors"],
 };
 
-const Supportors = () => {
+const supporters = () => {
   // Group supporters into sections
-  const groupedSupportors = Object.entries(roleMap).map(
+  const groupedsupporters = Object.entries(roleMap).map(
     ([section, keywords]) => ({
       section,
-      members: SupportorsData.filter((s) =>
+      members: supportersData.filter((s) =>
         keywords.some((kw) =>
           (s.role || "").split(";")[0].toLowerCase().trim().startsWith(kw)
         )
@@ -46,7 +46,7 @@ const Supportors = () => {
             animate={{ opacity: 1, y: 0 }}
           >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-poppins mb-6">
-              Our <span className="text-gradient">Supportors</span>
+              Our <span className="text-gradient">Supporters</span>
             </h1>
           </motion.div>
         </div>
@@ -55,7 +55,7 @@ const Supportors = () => {
       {/* Cards Section */}
       <section className="py-20 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {groupedSupportors.map(
+          {groupedsupporters.map(
             (group) =>
               group.members.length > 0 && (
                 <div key={group.section} className="mb-16">
@@ -255,4 +255,4 @@ const Supportors = () => {
   );
 };
 
-export default Supportors;
+export default supporters;
