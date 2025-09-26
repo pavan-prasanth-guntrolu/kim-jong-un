@@ -54,11 +54,11 @@ const Supportors = () => {
 
       {/* Cards Section */}
       <section className="py-20 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container items-center mx-auto px-4 sm:px-6 lg:px-8">
           {groupedSupportors.map(
             (group) =>
               group.members.length > 0 && (
-                <div key={group.section} className="mb-16">
+                <div key={group.section} className="mb-16 ">
                   {/* Section Heading */}
                   <h2 className="text-3xl font-bold text-center mb-10 text-gradient">
                     {group.section}
@@ -82,6 +82,7 @@ const Supportors = () => {
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                         viewport={{ once: true }}
                         whileHover={{ y: -5 }}
+                        className=""
                       >
                         <Dialog>
                           <DialogTrigger asChild>
