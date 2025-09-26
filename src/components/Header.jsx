@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ChevronDown } from "lucide-react";
 import NewLogo from "../../Graphics/Badge/Badge.png";
 import RguktLogo from "../../Graphics/rgukt_logo.png";
 import { useAuth } from "@/components/AuthProvider";
@@ -9,8 +9,8 @@ import { useAuth } from "@/components/AuthProvider";
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isDesktopDropdownOpen, setIsDesktopDropdownOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null); // desktop
+  const [openMobileDropdown, setOpenMobileDropdown] = useState(null); // mobile
   const location = useLocation();
   const { user, signOut } = useAuth();
   const dropdownRef = useRef(null);
@@ -19,7 +19,6 @@ const Header = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -27,33 +26,39 @@ const Header = () => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDesktopDropdownOpen(false);
+        setOpenDropdown(null);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [dropdownRef]);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const navigation = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Schedule", href: "/schedule" },
     {
-      name: "Events",
+      name: "About Us",
       dropdown: [
+        { name: "About", href: "/about" },
+        { name: "Our Team", href: "/team" },
+      ],
+    },
+    {
+      name: "Programs",
+      dropdown: [
+        { name: "About Qiskit", href: "/schedule" },
         { name: "Workshops", href: "/workshops" },
         { name: "Hackathon", href: "/hackathon" },
       ],
     },
-    { name: "Speakers", href: "/speakers" },
-
-    { name: "Materials", href: "/materials" },
+    {
+      name: "Resources",
+      dropdown: [
+        { name: "Speakers", href: "/speakers" },
+        { name: "Materials", href: "/materials" },
+      ],
+    },
     { name: "Sponsors", href: "/sponsors" },
     { name: "Contact", href: "/contact" },
-    { name: "Team", href: "/team" },
     { name: "Supportors", href: "/supportors" },
   ];
 
@@ -71,11 +76,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <img
-              src={RguktLogo}
-              alt="Qiskit Fall Fest Logo"
-              className="h-10 w-auto"
-            />
+            <img src={RguktLogo} alt="RGUKT Logo" className="h-10 w-auto" />
             <img
               src={NewLogo}
               alt="Qiskit Fall Fest Logo"
@@ -88,27 +89,53 @@ const Header = () => {
           <nav className="hidden lg:flex items-center space-x-8">
             {navigation.map((item) =>
               item.dropdown ? (
-                <div key={item.name} className="relative" ref={dropdownRef}>
+                <div
+                  key={item.name}
+                  className="relative"
+                  ref={dropdownRef}
+                  onMouseEnter={() => setOpenDropdown(item.name)}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
                   <button
-                    onClick={() => setIsDesktopDropdownOpen((prev) => !prev)}
-                    className="text-sm font-medium hover:text-primary focus:outline-none"
+                    onClick={() =>
+                      setOpenDropdown((prev) =>
+                        prev === item.name ? null : item.name
+                      )
+                    }
+                    className="flex items-center space-x-1 text-sm font-medium hover:text-primary focus:outline-none"
                   >
-                    {item.name}
+                    <span>{item.name}</span>
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-200 ${
+                        openDropdown === item.name ? "rotate-180" : ""
+                      }`}
+                    />
                   </button>
-                  {isDesktopDropdownOpen && (
-                    <div className="absolute left-0 mt-2 bg-background border border-white/10 rounded-lg shadow-lg">
-                      {item.dropdown.map((subItem) => (
-                        <Link
-                          key={subItem.name}
-                          to={subItem.href}
-                          onClick={() => setIsDesktopDropdownOpen(false)}
-                          className="block px-4 py-2 text-sm text-muted-foreground hover:bg-primary/10 hover:text-primary"
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+
+                  {/* Animated Dropdown */}
+                  <AnimatePresence>
+                    {openDropdown === item.name && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute left-0 mt-2 min-w-[220px] bg-background border border-white/10 rounded-lg shadow-lg z-50 pt-2"
+                      >
+                        {item.dropdown.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            to={subItem.href}
+                            onClick={() => setOpenDropdown(null)}
+                            className="block px-4 py-2 text-sm text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               ) : (
                 <Link
@@ -141,11 +168,7 @@ const Header = () => {
                 Sign Out
               </button>
             ) : (
-              <Link to="/login">
-                {/* <button className="px-4 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/90">
-                  Sign In
-                </button> */}
-              </Link>
+              <Link to="/login"></Link>
             )}
           </div>
 
@@ -160,82 +183,100 @@ const Header = () => {
       </div>
 
       {/* Mobile Navigation */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="lg:hidden bg-background border-t border-white/10 shadow-lg"
-        >
-          <nav className="flex flex-col space-y-4 p-4">
-            {navigation.map((item) =>
-              item.dropdown ? (
-                <div key={item.name} className="relative">
-                  <button
-                    onClick={() =>
-                      setIsDropdownOpen((prev) =>
-                        prev === item.name ? null : item.name
-                      )
-                    }
-                    className="text-left w-full px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/10 hover:text-primary"
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="lg:hidden bg-background border-t border-white/10 shadow-lg"
+          >
+            <nav className="flex flex-col space-y-4 p-4">
+              {navigation.map((item) =>
+                item.dropdown ? (
+                  <div key={item.name} className="relative">
+                    <button
+                      onClick={() =>
+                        setOpenMobileDropdown((prev) =>
+                          prev === item.name ? null : item.name
+                        )
+                      }
+                      className="flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/10 hover:text-primary"
+                    >
+                      <span>{item.name}</span>
+                      <ChevronDown
+                        size={16}
+                        className={`transition-transform duration-200 ${
+                          openMobileDropdown === item.name ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {openMobileDropdown === item.name && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="pl-4"
+                        >
+                          {item.dropdown.map((subItem) => (
+                            <Link
+                              key={subItem.name}
+                              to={subItem.href}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="block px-3 py-2 text-sm text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                            >
+                              {subItem.name}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block px-3 py-2 rounded-lg text-sm font-medium ${
+                      isActive(item.href)
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                    }`}
                   >
                     {item.name}
-                  </button>
-                  {isDropdownOpen === item.name && (
-                    <div className="pl-4">
-                      {item.dropdown.map((subItem) => (
-                        <Link
-                          key={subItem.name}
-                          to={subItem.href}
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          className="block px-3 py-2 text-sm text-muted-foreground hover:bg-primary/10 hover:text-primary"
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block px-3 py-2 rounded-lg text-sm font-medium ${
-                    isActive(item.href)
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              )
-            )}
-            <Link to="/register" onClick={() => setIsMobileMenuOpen(false)}>
-              <button className="w-full px-3 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90">
-                Register
-              </button>
-            </Link>
-            {user ? (
-              <button
-                onClick={() => {
-                  signOut();
-                  setIsMobileMenuOpen(false);
-                }}
-                className="w-full px-3 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/90"
-              >
-                Sign Out
-              </button>
-            ) : (
-              <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                <button className="w-full px-3 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/90">
-                  Sign In
+                  </Link>
+                )
+              )}
+
+              <Link to="/register" onClick={() => setIsMobileMenuOpen(false)}>
+                <button className="w-full px-3 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90">
+                  Register
                 </button>
               </Link>
-            )}
-          </nav>
-        </motion.div>
-      )}
+              {user ? (
+                <button
+                  onClick={() => {
+                    signOut();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full px-3 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/90"
+                >
+                  Sign Out
+                </button>
+              ) : (
+                <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                  <button className="w-full px-3 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/90">
+                    Sign In
+                  </button>
+                </Link>
+              )}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
