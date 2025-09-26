@@ -12,6 +12,7 @@ import { AuthProvider } from "@/components/AuthProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import CurtainLanding from "./pages/CurtainLanding";
 
 // Pages with lazy loading for better performance
 const Home = lazy(() => import("@/pages/Home"));
@@ -78,6 +79,7 @@ const App = () => {
                     <Suspense fallback={<LoadingSpinner />}>
                       <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/opening" element={<CurtainLanding />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/schedule" element={<Schedule />} />
