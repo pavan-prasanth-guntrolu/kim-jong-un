@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Twitter, Linkedin, Instagram, Calendar } from "lucide-react";
-import SupportorsData from "@/data/supportors.json";
+import SupportorsData from "@/data/supporters.json";
 
 // Explicit role mapping (singular & plural covered)
 const roleMap = {
@@ -46,7 +46,7 @@ const Supportors = () => {
             animate={{ opacity: 1, y: 0 }}
           >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-poppins mb-6">
-              Our <span className="text-gradient">Supportors</span>
+              Our <span className="text-gradient">Supporters</span>
             </h1>
           </motion.div>
         </div>
@@ -54,25 +54,20 @@ const Supportors = () => {
 
       {/* Cards Section */}
       <section className="py-20 lg:py-24">
-        <div className="container items-center mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {groupedSupportors.map(
             (group) =>
               group.members.length > 0 && (
-                <div key={group.section} className="mb-16 ">
+                <div key={group.section} className="mb-16">
                   {/* Section Heading */}
                   <h2 className="text-3xl font-bold text-center mb-10 text-gradient">
                     {group.section}
                   </h2>
 
-                  {/* Grid for members (center when < 3 cards) */}
+                  {/* Grid for members */}
                   <div
-                    className={`grid gap-6 lg:gap-8 justify-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ${
-                      group.members.length === 1
-                        ? "align-items-center"
-                        : group.members.length === 2
-                        ? ""
-                        : ""
-                    }`}
+                    className="grid gap-6 lg:gap-8 justify-items-center 
+                grid-cols-[repeat(auto-fit,minmax(300px,1fr))]"
                   >
                     {group.members.map((supportor, index) => (
                       <motion.div
@@ -82,7 +77,7 @@ const Supportors = () => {
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                         viewport={{ once: true }}
                         whileHover={{ y: -5 }}
-                        className=""
+                        className="w-full max-w-sm"
                       >
                         <Dialog>
                           <DialogTrigger asChild>
@@ -111,7 +106,6 @@ const Supportors = () => {
                                   {supportor.name}
                                 </h3>
 
-                                {/* Split role into lines */}
                                 {supportor.role.split(";").map((line, i) => (
                                   <p
                                     key={i}
@@ -132,8 +126,8 @@ const Supportors = () => {
                                   {supportor.bio}
                                 </p>
 
-                                {/* Social links */}
                                 <div className="mt-4 flex gap-3 justify-center">
+                                  {/* Social links */}
                                   <a
                                     href={
                                       supportor.twitter
@@ -190,13 +184,14 @@ const Supportors = () => {
                             </Card>
                           </DialogTrigger>
 
-                          {/* Dialog Details */}
+                          {/* Dialog Content */}
                           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                             <DialogHeader>
                               <DialogTitle className="text-2xl">
                                 {supportor.name}
                               </DialogTitle>
                             </DialogHeader>
+
                             <div className="space-y-6">
                               <div className="flex items-start space-x-4">
                                 <div className="flex-shrink-0 w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
