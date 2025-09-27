@@ -12,6 +12,7 @@ import speakersData from "@/data/speakers.json";
 
 const Speakers = () => {
   let filteredSpeakers = speakersData;
+  // filteredSpeakers = [];
 
   return (
     <motion.div
@@ -39,7 +40,11 @@ const Speakers = () => {
 
       <section className="py-20 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {/* <h1 className="text-center ">Coming soon</h1> */}
+          <div
+            className="grid gap-6 lg:gap-8 justify-items-center 
+                grid-cols-[repeat(auto-fit,minmax(300px,1fr))]"
+          >
             {filteredSpeakers.map((speaker, index) => (
               <motion.div
                 key={speaker.id}
@@ -53,14 +58,22 @@ const Speakers = () => {
                   <DialogTrigger asChild>
                     <Card className="glass-card border border-white/10 h-full flex flex-col overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
                       <div className="relative h-64 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                        <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center">
-                          <span className="text-3xl font-bold text-primary">
-                            {speaker.name
-                              .split(" ")
-                              .map((n) => n[0])
-                              .join("")}
-                          </span>
-                        </div>
+                        {speaker.image ? (
+                          <img
+                            src={speaker.image}
+                            alt={speaker.name}
+                            className="w-48 h-48 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-32 h-32 bg-primary/20 rounded-full flex items-center justify-center">
+                            <span className="text-3xl font-bold text-primary">
+                              {speaker.name
+                                .split(" ")
+                                .map((n) => n[0])
+                                .join("")}
+                            </span>
+                          </div>
+                        )}
                       </div>
 
                       <CardContent className="p-6 flex flex-col flex-1">
@@ -73,7 +86,7 @@ const Speakers = () => {
                         <p className="text-muted-foreground text-sm mb-4">
                           {speaker.company}
                         </p>
-                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 flex-1">
+                        <p className="text-muted-foreground  font-bold leading-relaxed line-clamp-3 flex-1">
                           {speaker.bio}
                         </p>
 

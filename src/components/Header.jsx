@@ -84,7 +84,7 @@ const Header = () => {
               alt="Qiskit Fall Fest Logo"
               className="h-10 w-auto"
             />
-            <span className="text-lg font-bold">Qiskit Fall Fest</span>
+            <span className="text-lg font-bold">Qiskit Fall Fest '25</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -170,7 +170,11 @@ const Header = () => {
                 Sign Out
               </button>
             ) : (
-              <Link to="/login"></Link>
+              <Link to="/login">
+                <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90">
+                  Sign In
+                </button>
+              </Link>
             )}
           </div>
 

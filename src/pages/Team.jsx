@@ -12,7 +12,6 @@ import speakersData from "@/data/speakers.json";
 import latestData from "@/data/latest-team.json";
 
 const Speakers = () => {
-  // let filteredSpeakers = speakersData;
   let filteredSpeakers = latestData;
 
   return (
@@ -21,24 +20,6 @@ const Speakers = () => {
       animate={{ opacity: 1 }}
       className="min-h-screen bg-background"
     >
-      {/* <section className="hero-gradient py-20 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="max-w-4xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-poppins mb-6">
-              Expert <span className="text-gradient">Speakers</span>
-            </h1>
-            <p className="text-xl lg:text-2xl text-muted-foreground">
-              Learn from leading quantum computing researchers and industry
-              professionals
-            </p>
-          </motion.div>
-        </div>
-      </section> */}
-
       <section className="hero-gradient py-20 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -69,14 +50,22 @@ const Speakers = () => {
                   <DialogTrigger asChild>
                     <Card className="glass-card border border-white/10 h-full flex flex-col overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
                       <div className="relative h-64 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                        <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center">
-                          <span className="text-3xl font-bold text-primary">
-                            {speaker.name
-                              .split(" ")
-                              .map((n) => n[0])
-                              .join("")}
-                          </span>
-                        </div>
+                        {speaker.image ? (
+                          <img
+                            src={speaker.image}
+                            alt={speaker.name}
+                            className="w-32 h-32 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-32 h-32 bg-primary/20 rounded-full flex items-center justify-center">
+                            <span className="text-3xl font-bold text-primary">
+                              {speaker.name
+                                .split(" ")
+                                .map((n) => n[0])
+                                .join("")}
+                            </span>
+                          </div>
+                        )}
                       </div>
 
                       <CardContent className="p-6 flex flex-col flex-1">
@@ -93,7 +82,6 @@ const Speakers = () => {
                           {speaker.bio}
                         </p>
 
-                        {/* Social links always visible */}
                         <div className="mt-4 flex gap-3">
                           <a
                             href={
@@ -159,13 +147,21 @@ const Speakers = () => {
                     </DialogHeader>
                     <div className="space-y-6">
                       <div className="flex items-start space-x-4">
-                        <div className="flex-shrink-0 w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
-                          <span className="text-2xl font-bold text-primary">
-                            {speaker.name
-                              .split(" ")
-                              .map((n) => n[0])
-                              .join("")}
-                          </span>
+                        <div className="flex-shrink-0 w-20 h-20 rounded-full flex items-center justify-center bg-primary/10">
+                          {speaker.image ? (
+                            <img
+                              src={speaker.image}
+                              alt={speaker.name}
+                              className="w-20 h-20 rounded-full object-cover"
+                            />
+                          ) : (
+                            <span className="text-2xl font-bold text-primary">
+                              {speaker.name
+                                .split(" ")
+                                .map((n) => n[0])
+                                .join("")}
+                            </span>
+                          )}
                         </div>
                         <div className="flex-1">
                           <h3 className="text-lg font-semibold">
