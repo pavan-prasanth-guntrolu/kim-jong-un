@@ -23,6 +23,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/lib/supabase";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -98,25 +99,13 @@ const Register = () => {
     setIsSubmitting(true);
 
     try {
-      // Commented out actual fetch for offline testing
-      /*
-      const response = await fetch("REPLACE_WITH_REGISTRATION_ENDPOINT", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      */
+      const { data, error } = await supabase
+        .from("registrations")
+        .insert([formData]);
 
-      // Dummy response for offline testing
-      const dummyResponse = {
-        ok: true,
-        json: async () => ({
-          success: true,
-          message: "Registration successful (dummy response)",
-        }),
-      };
+      if (error) {
+        throw error;
+      }
 
       setIsSubmitted(true);
       toast({
@@ -124,24 +113,13 @@ const Register = () => {
         description:
           "Thanks! You're registered for Qiskit Fall Fest 2025 — check your email for details.",
       });
-      if (response.ok) {
-        setIsSubmitted(true);
-        toast({
-          title: "Registration Successful!",
-          description:
-            "Thanks! You're registered for Qiskit Fall Fest 2025 — check your email for details.",
-        });
-      } else {
-        throw new Error("Registration failed");
-      }
     } catch (error) {
-      // Fallback to Google Form if registration endpoint fails
-      console.log("Registration endpoint failed, opening Google Form fallback");
-      window.open("REPLACE_WITH_GOOGLE_FORM_URL", "_blank");
-
+      console.error("Error submitting registration:", error);
       toast({
-        title: "Registration Form Opened",
-        description: "Please complete your registration in the new tab.",
+        title: "Registration Failed",
+        description:
+          "An error occurred while submitting your registration. Please try again.",
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
@@ -487,7 +465,7 @@ const Register = () => {
                 <div className="text-center text-sm text-muted-foreground">
                   Having trouble? You can also{" "}
                   <a
-                    href="REPLACE_WITH_GOOGLE_FORM_URL"
+                    href="#"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary hover:underline inline-flex items-center"
