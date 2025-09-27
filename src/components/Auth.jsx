@@ -28,7 +28,7 @@ const AuthComponent = ({ onSignIn }) => {
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           theme="dark"
-          providers={[]} // Keep third-party providers empty
+          providers={["google"]} // Keep third-party providers empty
           redirectTo={window.location.origin} // Use origin instead of hardcoded URL
           onError={handleAuthError}
         />
